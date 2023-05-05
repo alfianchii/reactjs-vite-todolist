@@ -1,22 +1,25 @@
-interface Props {
-	children: string;
-	buttonType?: "submit" | "reset" | "button";
-	onClick?: () => void;
-	color?: "primary" | "danger" | "success" | "warning" | "info" | "light" | "dark";
+import { ButtonHTMLAttributes } from "react";
+
+// type == variable like const, let, or var for interface
+type ButtonColor = "primary" | "danger" | "success" | "warning" | "info" | "light" | "dark";
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+	color?: ButtonColor;
 	outline?: boolean;
-	otherClass?: string;
+	onClick?: () => void;
 }
 
-const Button = ({ children = "Click", buttonType = "submit", onClick, color = "primary", outline = false, otherClass }: Props) => {
-	if (outline)
-		return (
-			<button className={"btn btn-outline-" + color + " " + otherClass} type={buttonType} onClick={onClick}>
-				{children}
-			</button>
-		);
+const Button = ({ children = "Click", type = "submit", onClick, color = "primary", outline = false, className, ...rest }: Props) => {
+	// Uses .trim() to remove any whitespace from the beginning or end of the string
+	/*
+  This can be useful in cases where the className parameter is optional and may 
+  be undefined, because it ensures that the final string does not have 
+  unnecessary whitespace that could cause issues with CSS styling.
+  */
+	const classes = `btn btn${outline ? "-outline" : ""}-${color} ${className ?? ""}`.trim();
 
 	return (
-		<button className={"btn btn-" + color + " " + otherClass} type={buttonType} onClick={onClick}>
+		<button className={classes} type={type} onClick={onClick} {...rest}>
 			{children}
 		</button>
 	);

@@ -29,10 +29,10 @@ const Form = ({ onSubmitHandler, states, acts }: Props) => {
 				<div className="input-group mb-3">
 					<input autoFocus type="text" className="form-control" id="activity-name" placeholder="Activity name ..." value={states.activity.value} onChange={(event) => states.activity.setter(event.target.value)} />
 
-					<Button outline={true}>{states.editedTodo.value.id ? "Save" : "Add"}</Button>
+					<Button outline>{states.editedTodo.value.id ? "Save" : "Add"}</Button>
 
 					{states.editedTodo.value.id && (
-						<Button outline={true} color="danger" otherClass="me-2" onClick={acts.exit}>
+						<Button outline color="danger" className="me-2" onClick={acts.exit}>
 							Cancel
 						</Button>
 					)}

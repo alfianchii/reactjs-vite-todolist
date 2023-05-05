@@ -44,10 +44,10 @@ const Table = ({ todos, acts }: Props) => {
 							</td>
 							<td className="align-middle">{todo.done ? <span className="badge text-bg-success">Finished</span> : <span className="badge text-bg-danger">Progress</span>}</td>
 							<td className="align-middle">
-								<Button otherClass="me-2 mb-2" onClick={acts.edit.bind(this, todo)}>
+								<Button className="me-2 mb-2" onClick={acts.edit.bind(this, todo)}>
 									Edit
 								</Button>
-								<Button color="danger" otherClass="me-2 mb-2" onClick={acts.remove.bind(this, todo.id)}>
+								<Button color="danger" className="me-2 mb-2" onClick={acts.remove.bind(this, todo.id)}>
 									Delete
 								</Button>
 							</td>
