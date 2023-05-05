@@ -32,3 +32,7 @@ jobs:
           folder: ./dist # The folder the action should deploy.
           target-folder: / # Deploy to `/` folder in `demo` branch
           commit-message: "update: demo"
+
+      - name: Serve
+        run: |
+          npm run preview
