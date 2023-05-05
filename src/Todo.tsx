@@ -123,7 +123,7 @@ function Todo() {
 			<div className="row">
 				<div className="col-12">
 					<Heading madeBy="Alfian" socmed="https://github.com/alfianchii">
-						Simple Todo-list Application
+						Simple Todo-list Application!
 					</Heading>
 
 					<Message>{message}</Message>
