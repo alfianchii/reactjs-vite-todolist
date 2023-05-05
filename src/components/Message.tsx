@@ -6,9 +6,9 @@ const Message = ({ children }: Props) => {
 	return (
 		<>
 			{children && (
-				<p>
-					<i>{children}</i>
-				</p>
+				<div className="alert alert-danger" role="alert">
+					{children}
+				</div>
 			)}
 		</>
 	);

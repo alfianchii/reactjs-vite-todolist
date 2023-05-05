@@ -52,7 +52,7 @@ function Todo() {
 	function saveTodoHandler(event: React.FormEvent) {
 		event.preventDefault();
 
-		if (!activity) return setMessage("Todo tidak boleh kosong!");
+		if (!activity) return setMessage("Activity name should not be empty!");
 
 		setMessage("");
 
