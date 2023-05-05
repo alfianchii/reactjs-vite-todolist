@@ -25,6 +25,11 @@ jobs:
           node-version: 18
           cache: "npm"
 
+      - name: Identity 🏠
+        run: |
+          git config --global user.name "alfianchii"
+          git config --global user.email "pianaee379@gmail.com"
+
       - name: Install 🔧
         run: |
           npm install
