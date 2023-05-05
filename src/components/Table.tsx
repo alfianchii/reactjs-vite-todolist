@@ -1,4 +1,5 @@
 import { Props as Todo } from "../Todo";
+import Button from "./Button";
 
 interface Props {
 	todos: Todo[];
@@ -43,12 +44,12 @@ const Table = ({ todos, acts }: Props) => {
 							</td>
 							<td className="align-middle">{todo.done ? <span className="badge text-bg-success">Finished</span> : <span className="badge text-bg-danger">Progress</span>}</td>
 							<td className="align-middle">
-								<button className="btn btn-primary me-2 mb-2" type="submit" onClick={acts.edit.bind(this, todo)}>
+								<Button otherClass="me-2 mb-2" onClick={acts.edit.bind(this, todo)}>
 									Edit
-								</button>
-								<button className="btn btn-danger me-2 mb-2" type="submit" onClick={acts.remove.bind(this, todo.id)}>
+								</Button>
+								<Button color="danger" otherClass="me-2 mb-2" onClick={acts.remove.bind(this, todo.id)}>
 									Delete
-								</button>
+								</Button>
 							</td>
 						</tr>
 					))}

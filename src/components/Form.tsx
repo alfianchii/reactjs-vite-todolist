@@ -1,4 +1,5 @@
 import { Props as Todo } from "../Todo";
+import Button from "./Button";
 
 interface Props {
 	onSubmitHandler: (event: React.FormEvent) => void;
@@ -28,14 +29,12 @@ const Form = ({ onSubmitHandler, states, acts }: Props) => {
 				<div className="input-group mb-3">
 					<input autoFocus type="text" className="form-control" id="activity-name" placeholder="Activity name ..." value={states.activity.value} onChange={(event) => states.activity.setter(event.target.value)} />
 
-					<button className="btn btn-outline-primary" type="submit">
-						{states.editedTodo.value.id ? "Save" : "Add"}
-					</button>
+					<Button outline={true}>{states.editedTodo.value.id ? "Save" : "Add"}</Button>
 
 					{states.editedTodo.value.id && (
-						<button className="btn btn-outline-danger me-2" onClick={acts.exit}>
+						<Button outline={true} color="danger" otherClass="me-2" onClick={acts.exit}>
 							Cancel
-						</button>
+						</Button>
 					)}
 				</div>
 			</form>
