@@ -29,6 +29,7 @@ jobs:
         run: |
           git config --global user.name "alfianchii"
           git config --global user.email "pianaee379@gmail.com"
+          git remote set-url origin https://alfianchii:${{ secrets.GITHUB_TOKEN }}@github.com/alfianchii/reactjs-vite-todolist
 
       - name: Install 🔧
         run: |
