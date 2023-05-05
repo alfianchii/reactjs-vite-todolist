@@ -1,21 +1,39 @@
 name: Deploy main to demo
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
+    branches: ["main"]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout 💾
+        uses: actions/checkout@v3
+
+      - name: Set up Node 📝
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "npm"
@@ -25,14 +43,13 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+      - name: Setup Pages 🏠
+        uses: actions/configure-pages@v3
+      - name: Upload artifact 💻
+        uses: actions/upload-pages-artifact@v1
         with:
-          branch: demo # The branch the action should deploy to.
-          folder: ./dist # The folder the action should deploy.
-          target-folder: / # Deploy to `/` folder in `demo` branch
-          commit-message: "update: demo"
-
-      - name: Serve
-        run: |
-          npm run preview
+          # Upload dist repository
+          path: "./dist"
+      - name: Deploy 🚀
+        id: deployment
+        uses: actions/deploy-pages@v1
