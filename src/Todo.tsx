@@ -88,6 +88,9 @@ function Todo() {
 	}
 
 	function editTodoHandler(todo: Props) {
+		const input = document.getElementById("activity-name") as HTMLInputElement;
+		input.focus();
+
 		setEditedTodo(todo);
 		setActivity(todo.activity);
 	}
