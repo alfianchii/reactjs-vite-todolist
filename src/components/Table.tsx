@@ -31,7 +31,7 @@ const Table = ({ todos, acts }: Props) => {
 								<div className="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
 									<input type="radio" className="btn-check" id={"not-yet-" + todo.id} autoComplete="off" checked={todo.done ? false : true} onChange={acts.done.bind(this, todo)} />
 									<label className="btn btn-outline-info" htmlFor={"not-yet-" + todo.id}>
-										Progress~
+										Ongoing~
 									</label>
 									<input type="radio" className="btn-check" id={"done-" + todo.id} autoComplete="off" checked={todo.done ? true : false} onChange={acts.done.bind(this, todo)} />
 									<label className="btn btn-outline-info" htmlFor={"done-" + todo.id}>
