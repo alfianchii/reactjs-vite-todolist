@@ -12,10 +12,6 @@ interface Props {
 			value: Todo;
 			setter: React.Dispatch<React.SetStateAction<Todo>>;
 		};
-		todos: {
-			value: Todo[];
-			setter: React.Dispatch<React.SetStateAction<Todo[]>>;
-		};
 	};
 	acts: {
 		exit: () => void;

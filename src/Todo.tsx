@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import Heading from "./components/Heading";
 import Message from "./components/Message";
 import Table from "./components/Table";
+import { setItemWithExp, getItemWithExp } from "./helpers/localStorage";
 
 export interface Props {
 	id: number;
@@ -30,7 +31,7 @@ function Todo() {
   'Propss' is an array of Props objects
   <Props[]>
   */
-	const [todos, setTodos] = useState<Props[]>([]);
+	const setTodos = useState<Props[]>([])[1];
 	// Same as 'activity'
 	const [message, setMessage] = useState<string>("");
 
@@ -42,10 +43,6 @@ function Todo() {
 		editedTodo: {
 			value: editedTodo,
 			setter: setEditedTodo,
-		},
-		todos: {
-			value: todos,
-			setter: setTodos,
 		},
 	};
 
@@ -62,11 +59,12 @@ function Todo() {
 				activity,
 			};
 
-			const updatedTodoIndex = todos.findIndex((todo) => todo.id === editedTodo.id);
+			const updatedTodoIndex = getItemWithExp("todos").findIndex((todo: Props) => todo.id === editedTodo.id);
 
-			const updatedTodos = [...todos];
+			const updatedTodos = [...getItemWithExp("todos")];
 			updatedTodos[updatedTodoIndex] = updatedTodo;
 			setTodos(updatedTodos);
+			setItemWithExp("todos", updatedTodos);
 			return exitTodoHandler();
 		}
 
@@ -75,14 +73,18 @@ function Todo() {
 			activity,
 			done: false,
 		};
-		setTodos([...todos, newTodo]);
+		const newTodos = [...getItemWithExp("todos"), newTodo];
+		setTodos(newTodos);
+		setItemWithExp("todos", newTodos);
+
 		setActivity("");
 	}
 
 	function removeTodoHandler(todoId: number) {
-		const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+		const updatedTodos = getItemWithExp("todos").filter((todo: Props) => todo.id !== todoId);
 
 		setTodos(updatedTodos);
+		setItemWithExp("todos", updatedTodos);
 
 		if (editedTodo.id) exitTodoHandler();
 	}
@@ -106,11 +108,12 @@ function Todo() {
 			done: !todo.done,
 		};
 
-		const updatedTodoIndex = todos.findIndex((currentTodo) => currentTodo.id === todo.id);
+		const updatedTodoIndex = getItemWithExp("todos").findIndex((currentTodo: Props) => currentTodo.id === todo.id);
 
-		const updatedTodos = [...todos];
+		const updatedTodos = [...getItemWithExp("todos")];
 		updatedTodos[updatedTodoIndex] = updatedTodo;
 		setTodos(updatedTodos);
+		setItemWithExp("todos", updatedTodos);
 	}
 
 	const acts = {
@@ -142,7 +145,7 @@ function Todo() {
 			<div className="row">
 				<div className="col-12">
 					<Table
-						todos={todos}
+						todos={getItemWithExp("todos")}
 						acts={{
 							done: acts.done,
 							edit: acts.edit,
