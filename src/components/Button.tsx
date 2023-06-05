@@ -6,10 +6,9 @@ type ButtonColor = "primary" | "danger" | "success" | "warning" | "info" | "ligh
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: ButtonColor;
 	outline?: boolean;
-	onClick?: () => void;
 }
 
-const Button = ({ children = "Click", type = "submit", onClick, color = "primary", outline = false, className, ...rest }: Props) => {
+const Button = ({ children = "Click", type = "submit", color = "primary", outline = false, className, ...rest }: Props) => {
 	// Uses .trim() to remove any whitespace from the beginning or end of the string
 	/*
   This can be useful in cases where the className parameter is optional and may 
@@ -19,7 +18,7 @@ const Button = ({ children = "Click", type = "submit", onClick, color = "primary
 	const classes = `btn btn${outline ? "-outline" : ""}-${color} ${className ?? ""}`.trim();
 
 	return (
-		<button className={classes} type={type} onClick={onClick} {...rest}>
+		<button className={classes} type={type} {...rest}>
 			{children}
 		</button>
 	);
