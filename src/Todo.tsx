@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { generateId } from "./helpers/generateId";
 import Form from "./components/Form";
 import Heading from "./components/Heading";
 import Message from "./components/Message";
 import Table from "./components/Table";
-import { setItemWithExp, getItemWithExp } from "./helpers/localStorage";
+import { generateId } from "./helpers/generateId";
+import { setItemWithExp as setLocal, getItemWithExp as getLocal } from "./helpers/localStorage";
 
 export interface Props {
 	id: number;
@@ -54,17 +54,17 @@ function Todo() {
 		setMessage("");
 
 		if (editedTodo.id) {
-			const updatedTodo = {
+			const updatedTodo: Props = {
 				...editedTodo,
 				activity,
 			};
 
-			const updatedTodoIndex = getItemWithExp("todos").findIndex((todo: Props) => todo.id === editedTodo.id);
+			const updatedTodoIndex: number = getLocal("todos").findIndex((todo: Props) => todo.id === editedTodo.id);
 
-			const updatedTodos = [...getItemWithExp("todos")];
+			const updatedTodos: Props[] = [...getLocal("todos")];
 			updatedTodos[updatedTodoIndex] = updatedTodo;
 			setTodos(updatedTodos);
-			setItemWithExp("todos", updatedTodos);
+			setLocal("todos", updatedTodos);
 			return exitTodoHandler();
 		}
 
@@ -73,24 +73,21 @@ function Todo() {
 			activity,
 			done: false,
 		};
-		const newTodos = [...getItemWithExp("todos"), newTodo];
+		const newTodos: Props[] = [...getLocal("todos"), newTodo];
 		setTodos(newTodos);
-		setItemWithExp("todos", newTodos);
-
+		setLocal("todos", newTodos);
 		setActivity("");
 	}
 
 	function removeTodoHandler(todoId: number) {
-		const updatedTodos = getItemWithExp("todos").filter((todo: Props) => todo.id !== todoId);
-
+		const updatedTodos: Props[] = getLocal("todos").filter((todo: Props) => todo.id !== todoId);
 		setTodos(updatedTodos);
-		setItemWithExp("todos", updatedTodos);
-
+		setLocal("todos", updatedTodos);
 		if (editedTodo.id) exitTodoHandler();
 	}
 
 	function editTodoHandler(todo: Props) {
-		const input = document.getElementById("activity-name") as HTMLInputElement;
+		const input: HTMLInputElement = document.getElementById("activity-name") as HTMLInputElement;
 		input.focus();
 
 		setEditedTodo(todo);
@@ -103,17 +100,17 @@ function Todo() {
 	}
 
 	function doneTodoHandler(todo: Props) {
-		const updatedTodo = {
+		const updatedTodo: Props = {
 			...todo,
 			done: !todo.done,
 		};
 
-		const updatedTodoIndex = getItemWithExp("todos").findIndex((currentTodo: Props) => currentTodo.id === todo.id);
+		const updatedTodoIndex: number = getLocal("todos").findIndex((currentTodo: Props) => currentTodo.id === todo.id);
 
-		const updatedTodos = [...getItemWithExp("todos")];
+		const updatedTodos: Props[] = [...getLocal("todos")];
 		updatedTodos[updatedTodoIndex] = updatedTodo;
 		setTodos(updatedTodos);
-		setItemWithExp("todos", updatedTodos);
+		setLocal("todos", updatedTodos);
 	}
 
 	const acts = {
@@ -145,7 +142,7 @@ function Todo() {
 			<div className="row">
 				<div className="col-12">
 					<Table
-						todos={getItemWithExp("todos")}
+						todos={getLocal("todos")}
 						acts={{
 							done: acts.done,
 							edit: acts.edit,

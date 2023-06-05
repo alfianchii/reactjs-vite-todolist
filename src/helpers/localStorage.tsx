@@ -6,12 +6,10 @@ const setItemWithExp = (key: string, value: unknown) => {
 	localStorage.setItem(key, JSON.stringify(item));
 };
 
-const getItemWithExp = (key: string) => {
+const getItemWithExp = (key: string): any[] => {
 	const item = JSON.parse(localStorage.getItem(key) || "[]");
 	const currentTime = new Date().getTime();
-	if (item && currentTime < item.expiration) {
-		return item.value;
-	}
+	if (item && currentTime < item.expiration) return item.value;
 	localStorage.removeItem(key);
 	return [];
 };
