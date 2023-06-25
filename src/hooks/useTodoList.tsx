@@ -8,16 +8,16 @@ export interface TodoProps {
 	done: boolean;
 }
 
-export interface TodoCore {
+export interface TodoCores {
 	todos: TodoProps[];
 	activity: string;
-	setActivity: React.Dispatch<React.SetStateAction<string>>;
 	editedTodo: TodoProps;
 	message: string;
 	inputRef: React.RefObject<HTMLInputElement>;
 }
 
-export interface TodoFunction {
+export interface TodoFunctions {
+	setActivity: React.Dispatch<React.SetStateAction<string>>;
 	save: (event: React.FormEvent) => void;
 	remove: (todoId: number) => void;
 	edit: (todo: TodoProps) => void;
@@ -25,7 +25,7 @@ export interface TodoFunction {
 	exit: () => void;
 }
 
-function useTodoList(): [TodoCore, TodoFunction] {
+function useTodoList(): [TodoCores, TodoFunctions] {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [activity, setActivity] = useState<string>("");
 	const [editedTodo, setEditedTodo] = useState<TodoProps>({} as TodoProps);
@@ -94,7 +94,8 @@ function useTodoList(): [TodoCore, TodoFunction] {
 		setLocal("todos", updatedTodos);
 	}
 
-	const acts: TodoFunction = {
+	const acts: TodoFunctions = {
+		setActivity,
 		save: saveTodoHandler,
 		remove: removeTodoHandler,
 		edit: editTodoHandler,
@@ -102,10 +103,9 @@ function useTodoList(): [TodoCore, TodoFunction] {
 		done: doneTodoHandler,
 	};
 
-	const cores: TodoCore = {
+	const cores: TodoCores = {
 		todos,
 		activity,
-		setActivity,
 		editedTodo,
 		message,
 		inputRef,

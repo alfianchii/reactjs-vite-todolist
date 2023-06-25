@@ -6,7 +6,7 @@ const setItemWithExp = (key: string, value: unknown) => {
 	localStorage.setItem(key, JSON.stringify(item));
 };
 
-const getItemWithExp = (key: string): any[] => {
+const getItemWithExp = (key: string): [] => {
 	const item = JSON.parse(localStorage.getItem(key) || "[]");
 	const currentTime = new Date().getTime();
 	if (item && currentTime < item.expiration) return item.value;

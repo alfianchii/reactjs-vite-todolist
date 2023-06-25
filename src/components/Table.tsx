@@ -1,10 +1,10 @@
-import { Props as Todo } from "../Todo";
+import { TodoProps as Todo } from "../hooks/useTodoList";
 import TodoList from "./TodoList";
-import { TodoFunction } from "../hooks/useTodoList";
+import { TodoFunctions } from "../hooks/useTodoList";
 
 interface Props {
 	todos: Todo[];
-	acts: TodoFunction;
+	acts: TodoFunctions;
 }
 
 const Table = ({ todos, acts }: Props) => {

@@ -4,12 +4,6 @@ import Message from "./components/Message";
 import Table from "./components/Table";
 import useTodoList from "./hooks/useTodoList";
 
-export interface Props {
-	id: number;
-	activity: string;
-	done: boolean;
-}
-
 function Todo() {
 	const [cores, acts] = useTodoList();
 

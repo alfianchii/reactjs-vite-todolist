@@ -1,9 +1,9 @@
-import { TodoFunction, TodoProps } from "../hooks/useTodoList";
+import { TodoFunctions, TodoProps } from "../hooks/useTodoList";
 import Button from "./Button";
 
 interface Props {
 	tasks: TodoProps[];
-	acts: TodoFunction;
+	acts: TodoFunctions;
 }
 
 const TodoList = ({ tasks, acts }: Props) => {
